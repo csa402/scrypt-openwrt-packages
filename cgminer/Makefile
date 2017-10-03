@@ -10,8 +10,8 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cgminer
 
-ifeq ($(CONFIG_CGMINER_GEKKO),y)
-       PKG_VERSION:=git-$(shell git ls-remote https://github.com/csa402/cgminer-gekko.git master | cut -f1 | cut -c1-7)
+ifeq ($(CONFIG_CGMINER_SCRYPT),y)
+       PKG_VERSION:=git-$(shell git ls-remote https://github.com/csa402/cgminer-dmaxl.git master | cut -f1 | cut -c1-7)
        PKG_REV:=master
 endif
 
@@ -19,8 +19,8 @@ PKG_RELEASE:=1
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_REV).tar.bz2
-ifeq ($(CONFIG_CGMINER_GEKKO),y)
-	PKG_SOURCE_URL:=git://github.com/csa402/cgminer-gekko.git
+ifeq ($(CONFIG_CGMINER_SCRYPT),y)
+	PKG_SOURCE_URL:=git://github.com/csa402/cgminer-dmaxl.git
 endif
 
 PKG_SOURCE_PROTO:=git
@@ -58,8 +58,8 @@ endef
 
 TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
-ifeq ($(CONFIG_CGMINER_GEKKO),y)
-	CONFIGURE_ARGS += --enable-gekko
+ifeq ($(CONFIG_CGMINER_SCRYPT),y)
+	CONFIGURE_ARGS += --enable-scrypt
 endif
 ifeq ($(CONFIG_TARGET_brcm2708_RaspberryPi),)
 	CONFIGURE_ARGS += --without-curses
@@ -81,10 +81,10 @@ define Package/cgminer/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/cgminer-api	   $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/cgminer  $(1)/usr/bin
 
-ifeq ($(CONFIG_CGMINER_GEKKO),y)
-	$(INSTALL_BIN) $(FILES_DIR)/cgminer-gekko-monitor        $(1)/usr/bin/cgminer-monitor
-	$(INSTALL_BIN) $(FILES_DIR)/cgminer.gekko.init           $(1)/etc/init.d/cgminer
-	$(CP)          $(FILES_DIR)/cgminer.gekko.config         $(1)/etc/config/cgminer
+ifeq ($(CONFIG_CGMINER_SCRYPT),y)
+	$(INSTALL_BIN) $(FILES_DIR)/cgminer-scrypt-monitor        $(1)/usr/bin/cgminer-monitor
+	$(INSTALL_BIN) $(FILES_DIR)/cgminer.scrypt.init           $(1)/etc/init.d/cgminer
+	$(CP)          $(FILES_DIR)/cgminer.scrypt.config         $(1)/etc/config/cgminer
 endif
 endef
 
