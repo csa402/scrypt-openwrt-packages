@@ -59,7 +59,7 @@ endef
 TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
 ifeq ($(CONFIG_CGMINER_SCRYPT),y)
-	CONFIGURE_ARGS += --enable-scrypt
+	CONFIGURE_ARGS += --enable-scrypt --enable-lketc --enable-zeus
 endif
 ifeq ($(CONFIG_TARGET_brcm2708_RaspberryPi),)
 	CONFIGURE_ARGS += --without-curses
