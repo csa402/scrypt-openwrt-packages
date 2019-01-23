@@ -11,7 +11,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=cgminer
 
 ifeq ($(CONFIG_CGMINER_SCRYPT),y)
-       PKG_VERSION:=git-$(shell git ls-remote https://github.com/csa402/cgminer-dmaxl.git master | cut -f1 | cut -c1-7)
+       #PKG_VERSION:=git-$(shell git ls-remote https://github.com/csa402/cgminer-dmaxl.git master | cut -f1 | cut -c1-7)
+       PKG_VERSION:=git-$(shell git ls-remote https://github.com/wareck/cgminer-lketc.git master | cut -f1 | cut -c1-7)
        PKG_REV:=master
 endif
 
@@ -20,7 +21,8 @@ PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_REV).tar.bz2
 ifeq ($(CONFIG_CGMINER_SCRYPT),y)
-	PKG_SOURCE_URL:=git://github.com/csa402/cgminer-dmaxl.git
+	#PKG_SOURCE_URL:=git://github.com/csa402/cgminer-dmaxl.git
+	PKG_SOURCE_URL:=git://github.com/wareck/cgminer-lketc.git
 endif
 
 PKG_SOURCE_PROTO:=git
